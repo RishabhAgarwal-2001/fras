@@ -15,7 +15,9 @@ import cv2
 import argparse
 import base64
 import io
-import logging
+from services.Logger import Logger
+
+logging = Logger()
 
 def find_face_in_image(image):
     fenc = fr.face_encodings(image)

@@ -5,7 +5,7 @@ Common functions that are used by other modules.
 :Authors: Balwinder Sodhi
 """
 
-import logging
+from services.Logger import Logger
 from flask import (Flask, redirect, session, url_for, flash)
 from datetime import datetime as DT
 from functools import wraps
@@ -13,6 +13,8 @@ import random
 import string
 from playhouse.shortcuts import *
 from models import db
+
+logging = Logger()
 
 TS_FORMAT = "%Y%m%d_%H%M%S"
 

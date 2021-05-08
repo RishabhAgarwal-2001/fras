@@ -6,10 +6,7 @@ Main entry point for the web application.
 """
 
 from flask import Flask, current_app, g
-#from flask_talisman import Talisman
-# import argparse
-# import json
-import logging
+from services.Logger import Logger
 from pathlib import Path
 import os
 import common as C
@@ -21,8 +18,9 @@ TS_FORMAT = "%Y%m%d_%H%M%S"
 app = Flask(__name__, static_folder="./app", static_url_path="/fras/app/")
 
 #Talisman(app)
-logging.basicConfig(filename='server.log',
-                    level=logging.INFO,
+log = Logger()
+log.config(filename='server.log',
+                    level="logging.INFO",
                     format='%(asctime)s %(levelname)s:: %(message)s',
                     datefmt='%d-%m-%Y@%I:%M:%S %p')
 
