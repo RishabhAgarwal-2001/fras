@@ -17,25 +17,23 @@ import base64
 import io
 import logging
 
-
-def get_face_encoding(image_bytes):
-    f = io.BytesIO(image_bytes)
-    image = fr.load_image_file(f)
+def find_face_in_image(image):
     fenc = fr.face_encodings(image)
     fc = len(fenc)
     if fc != 1:
         raise Exception("Found {0} faces in photo. Expected only 1.".format(fc))
     return fenc[0]
+
+def get_face_encoding(image_bytes):
+    f = io.BytesIO(image_bytes)
+    image = fr.load_image_file(f)
+    return find_face_in_image(image)
 
 
 def get_face_encoding_b64(image_b64):
     img_data = base64.b64decode(image_b64)
     image = fr.load_image_file(io.BytesIO(img_data))
-    fenc = fr.face_encodings(image)
-    fc = len(fenc)
-    if fc != 1:
-        raise Exception("Found {0} faces in photo. Expected only 1.".format(fc))
-    return fenc[0]
+    return find_face_in_image(image)
 
 
 def get_known_faces(images_glob):
